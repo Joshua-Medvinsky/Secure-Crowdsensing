@@ -38,12 +38,6 @@ from kivy.properties import StringProperty
 
 
 
-# Designate Our .kv design file 
-
-#TO DO
-#Create buttons of 3-5 locations of the submission uw 1 uw 2 arc etc.
-#hook the code up to some sort of data storage, text file for now?
-#Clean it up make the ui look nice
 
 
 locationData = collections.namedtuple('locationData',['location','noiseLevel'])
