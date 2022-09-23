@@ -1,0 +1,237 @@
+#:kivy 1.0
+#:import kivy kivy
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+
+
+
+ScreenManagement:
+    transition: FadeTransition()
+    MyLayout:
+    ScreenTwo:
+    ScreenThree:
+
+
+<MyLayout>
+	id: my_widget
+	BoxLayout:
+        
+		orientation: "vertical"
+		size: root.width, root.height
+
+		padding: 50
+		spacing: 20
+
+		Image:
+			id: my_image
+			source: "bothell_imag.png"
+            allow_stretch: True
+            size_hint_y: 2
+            size_hint_x: 1
+
+
+        Label:
+			text: "Select Noise Location"
+			font_size:30
+
+
+
+			
+        GridLayout:
+            cols:4
+            
+
+			Label:
+				text: "UW 1"
+				font_size:20
+			Button:
+				on_press:
+            		root.manager.location_number = 1
+            		root.modifyString("UW 1")
+        			print("UW 1 selected")
+        			root.manager.current = 'screen_2'
+
+
+			Label:
+				text: "UW 2"
+				font_size:20
+			Button:
+    			on_press:
+                	root.manager.location_number = 2
+                	root.modifyString("UW 2")
+        			print("UW 2 selected")
+        			root.manager.current = 'screen_2'
+
+			Label:
+				text: "LB 1"
+				font_size:20
+			Button:
+    			on_press:
+                	root.manager.location_number = 3
+                	root.modifyString("LB 1")
+        			print("LB 1 Location selected")
+        			root.manager.current = 'screen_2'
+        				
+            Label:
+				text: "Discovery Hall"
+				font_size:20
+			Button:
+				on_press:
+            		root.manager.location_number = 4
+            		root.modifyString("Discovery Hall")
+        			print("Discovery Hall selected")
+        			root.manager.current = 'screen_2'
+
+
+			Label:
+				text: "ARC"
+				font_size:20
+			Button:
+    			on_press:
+                	root.manager.location_number = 5
+                	root.modifyString("ARC")
+        			print("ARC selected")
+        			root.manager.current = 'screen_2'
+
+			Label:
+				text: "Sports Complex"
+				font_size:20
+			Button:
+    			on_press:
+                	root.manager.location_number = 6
+                	root.modifyString("Sports Complex")
+        			print("Sports Complex selected")
+        			root.manager.current = 'screen_2'
+
+			Label:
+				text: "LB 2"
+				font_size:20
+			Button:
+    			on_press:
+                	root.manager.location_number = 7
+                	root.modifyString("LB 2")
+        			print("LB 2 Location selected")
+        			root.manager.current = 'screen_2'
+			Label:
+				text: "LBA"
+				font_size:20
+			Button:
+    			on_press:
+                	root.manager.location_number = 8
+                	root.modifyString("LBA")
+        			print("LBA Location selected")
+        			root.manager.current = 'screen_2'
+
+<ScreenTwo>
+    name: "screen_2"
+    slide_text: slider_label
+    BoxLayout:
+        
+		orientation: "vertical"
+		size: root.width, root.height
+
+		padding: 50
+		spacing: 20
+
+		Image:
+			id: my_image
+			source: "bothell_imag.png"
+            allow_stretch: True
+            size_hint_y: 4
+            size_hint_x: 1
+
+
+        Label:
+			text: "Select the noise level for " +"ARC" + " on a scale of 1-10"
+			font_size:30
+		
+		Label: 
+			id: slider_label
+			text: "Select from 1-10"
+			font_size: 32
+
+		Slider:
+			min: 1
+			max: 10
+			step: 1
+			orientation: "horizontal"
+			on_value: 
+    			root.slide_it(*args)
+
+        	
+        RoundedButton:
+			text: "Submit"
+			pos_hint: {'center_x-1': 0.5}
+			size_hint: (1, .3)
+			#background_color: (48/255,84/255,150/255,1)
+			#background_normal: ''
+			on_press: 
+        		root.manager.current = 'screen_3'
+        		root.testPrint()
+        	
+        	
+
+    			
+			
+<ScreenThree>
+    name: "screen_3"
+
+    BoxLayout:
+        
+		orientation: "vertical"
+		size: root.width, root.height
+
+		padding: 50
+		spacing: 20
+
+
+
+		Image:
+			id: my_image
+			source: "bothell_imag.png"
+            allow_stretch: True
+            size_hint_y: 2
+            size_hint_x: 1
+
+
+        Label:
+			text: "Thank you for submitting your input!"
+			font_size: 40    				
+        Button:
+            id: btnExit
+            text: "Exit"
+            on_press: 
+                root.storeInfo()
+                root.closeApp()
+                
+
+<GpsScreen>
+    BoxLayout:
+        orientation: 'vertical'
+
+        Label:
+            text: app.gps_location
+
+        Label:
+            text: app.gps_status
+
+        BoxLayout:
+            size_hint_y: None
+            height: '48dp'
+            padding: '4dp'
+
+            ToggleButton:
+                text: 'Start' if self.state == 'normal' else 'Stop'
+                on_state:
+                    app.start(1000, 0) if self.state == 'down' else \
+                    app.stop()
+
+<RoundedButton@Button>
+	background_color: (0,0,0,0)
+	background_normal: ''
+	canvas.before:
+		Color:
+			rgba: (48/255,84/255,150/255,1)
+		RoundedRectangle:
+			size: self.size
+			pos: self.pos
+			radius: [58]
