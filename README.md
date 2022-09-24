@@ -1,4 +1,4 @@
-# Secure-Crowdsensing
+# Secure Crowdsensing
 
 This capstone project involved using crowdsensing is to obtain information on the noise levels of the campus and utilizing the blockchain to keep user data safe. An application was created to allow the user to report the location and level of noise that they observed. The next obstacle was to find a practical way to store this data within the blockchain.
 
